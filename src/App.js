@@ -1,21 +1,28 @@
-import React, { useState } from "react";
-import useForm from "./hooks/useForm";
+import React, { useState, useCallback } from "react";
+import { FormProvider, Controller, useForm } from "react-hook-form";
 
 import "./app.css";
 export default function App() {
-  const [tasks, setTasks] = useState([
-    /* { id: 1, name: "tarefa 1", description: "arrumar o erro 1" },
-    { id: 2, name: "tarefa 2", description: "arrumar o erro 2" },
-    { id: 3, name: "tarefa 3", description: "arrumar o erro 3" }, */
-  ]);
-  const [{ values, loading }, handleChange, handleSubmit] = useForm();
+  const [tasks, setTasks] = useState([]);
+
+  const onSubmit = useCallback(
+    ({ title, desc, data }) =>
+      handleSubmit((prevState) => [
+        ...prevState,
+        { id: Math.random(), title, desc, data },
+      ]),
+    [setTasks]
+  );
+
+  const methods = useForm();
+
+  const { handleSubmit } = methods;
 
   const enviarContato = () => {
-    // faça o que for preciso :)
-    console.log(values);
+    console.log(methods);
   };
 
-  function handleAddTasks() {
+/*   function handleAddTasks() {
     setTasks((prevState) => [
       ...prevState,
       {
@@ -24,44 +31,47 @@ export default function App() {
         description: "arrumar erro",
       },
     ]);
-  }
+  } */
 
   return (
     <>
       <div id="principal">
         <div id="container">
-        <form onSubmit={handleSubmit(enviarContato)}>
-        <input
-          onChange={handleChange}
-          type="text"
-          name="title"
-          placeholder="Tarefa"
-        />
-        <input
-          onChange={handleChange}
-          type="text"
-          name="desc"
-          placeholder="Descricao "
-        />
-        <input
-          onChange={handleChange}
-          type="text"
-          name="data"
-          placeholder="Data"
-        />
-        <button type="submit">{loading ? "Enviando..." : "Enviar"}</button>
-      </form>
-        
-        
-        <ul>
-          {tasks.map((task) => (
-            <li key={task.id}>
-              {task.name}, {task.description}
-            </li>
-          ))}
-        </ul>
+          <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(enviarContato)}>
+              <Controller
+                as={<input />}
+                type="text"
+                name="title"
+                placeholder="Tarefa"
+              />
+              <Controller
+                as={<input />}
+                type="text"
+                name="desc"
+                placeholder="Descrição"
+              />
+              <Controller
+                as={<input />}
+                type="text"
+                name="date"
+                placeholder="Data"
+              />
+
+              <button type="submit"> Enviar
+                {/* loading ? "Enviando..." : "Enviar" */}
+              </button>
+            </form>
+          </FormProvider>
+
+          <ul>
+            {tasks.map((task) => (
+              <li key={task.id}>
+                {task.name}, {task.description}
+              </li>
+            ))}
+          </ul>
         </div>
-      
       </div>
     </>
   );
