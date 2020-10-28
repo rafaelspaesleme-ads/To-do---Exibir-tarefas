@@ -8,14 +8,14 @@
   justify-content: center;
 }
 
-#principal h1 {
+/* #principal h1 {
   color: black;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   box-shadow: 10px 5px 5px #0e0e0e;
   width: 550px;
   border-radius: 5%;
 }
-
+ */
 #principal form {
   width: 100%;
   display: grid;

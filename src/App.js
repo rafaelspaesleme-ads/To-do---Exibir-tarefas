@@ -1,76 +1,73 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { FormProvider, Controller, useForm } from "react-hook-form";
 
 import "./app.css";
-export default function App() {
-  const [tasks, setTasks] = useState([]);
 
-  const onSubmit = useCallback(
-    ({ title, desc, data }) =>
-      handleSubmit((prevState) => [
-        ...prevState,
-        { id: Math.random(), title, desc, data },
-      ]),
-    [setTasks]
-  );
+export default function App() {
+
+
 
   const methods = useForm();
 
   const { handleSubmit } = methods;
-
-  const enviarContato = () => {
-    console.log(methods);
-  };
-
-/*   function handleAddTasks() {
-    setTasks((prevState) => [
-      ...prevState,
-      {
-        id: Math.random(),
-        name: "Nova Tarefa",
-        description: "arrumar erro",
-      },
-    ]);
-  } */
+ 
+  const { control } = useState("");
+  const enviarContato = () => {   
+      console.log(handleSubmit);  
+  }
 
   return (
     <>
       <div id="principal">
         <div id="container">
           <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(enviarContato)}>
+            <form onSubmit={() => handleSubmit(enviarContato)}>
               <Controller
+                /*   value={title}
+                onChange={(e) => setTitle(e.target.value)} */
+                defaultValue=""
                 as={<input />}
-                type="text"
+                control={control}
                 name="title"
                 placeholder="Tarefa"
               />
               <Controller
+                /*  value={desc}
+                onChange={(e) => setDesc(e.target.value)} */
                 as={<input />}
+                defaultValue=""
+                control={control}
                 type="text"
                 name="desc"
                 placeholder="Descrição"
               />
               <Controller
                 as={<input />}
+                /*  value={date}
+                onChange={(e) => setDate(e.target.value)} */
+                control={control}
+                defaultValue=""
                 type="text"
                 name="date"
                 placeholder="Data"
               />
 
-              <button type="submit"> Enviar
-                {/* loading ? "Enviando..." : "Enviar" */}
-              </button>
+              <button type="submit"> Enviar</button>
             </form>
           </FormProvider>
 
-          <ul>
+        {/*   <ul>
             {tasks.map((task) => (
               <li key={task.id}>
                 {task.name}, {task.description}
               </li>
-            ))}
-          </ul>
+            ))} 
+          </ul>*/}
+
+          <ul>Tarefa 1</ul>
+          <ul>Tarefa 2</ul>
+          <ul>Tarefa 3</ul>
+          <ul>Tarefa 4</ul>
         </div>
       </div>
     </>
