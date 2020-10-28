@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FormProvider, Controller, useForm } from "react-hook-form";
 
-import "./app.css";
+import "./App.css";
 
 export default function App() {
   const methods = useForm();
