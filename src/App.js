@@ -4,24 +4,24 @@ import { FormProvider, Controller, useForm } from "react-hook-form";
 import "./app.css";
 
 export default function App() {
-
-
-
   const methods = useForm();
 
-  const { handleSubmit } = methods;
- 
-  const { control } = useState("");
-  const enviarContato = () => {   
-      console.log(handleSubmit);  
-  }
+  const { handleSubmit, control } = methods;
+
+  const [tarefa, setTarefa] = useState({});
+  const [lista, setLista] = useState([]);
+  const enviarContato = (data) => {
+    const novaTarefa = { id: Math.floor(Math.random() * 999 + 1), ...data };
+    setLista((prevState) => [...prevState, novaTarefa]);
+    console.log("lista", lista);
+  };
 
   return (
     <>
       <div id="principal">
         <div id="container">
           <FormProvider {...methods}>
-            <form onSubmit={() => handleSubmit(enviarContato)}>
+            <form onSubmit={handleSubmit(enviarContato)}>
               <Controller
                 /*   value={title}
                 onChange={(e) => setTitle(e.target.value)} */
@@ -30,6 +30,7 @@ export default function App() {
                 control={control}
                 name="title"
                 placeholder="Tarefa"
+                required
               />
               <Controller
                 /*  value={desc}
@@ -40,6 +41,7 @@ export default function App() {
                 type="text"
                 name="desc"
                 placeholder="Descrição"
+                required
               />
               <Controller
                 as={<input />}
@@ -50,24 +52,25 @@ export default function App() {
                 type="text"
                 name="date"
                 placeholder="Data"
+                required
               />
 
               <button type="submit"> Enviar</button>
             </form>
           </FormProvider>
 
-        {/*   <ul>
-            {tasks.map((task) => (
-              <li key={task.id}>
-                {task.name}, {task.description}
-              </li>
-            ))} 
-          </ul>*/}
-
-          <ul>Tarefa 1</ul>
-          <ul>Tarefa 2</ul>
-          <ul>Tarefa 3</ul>
-          <ul>Tarefa 4</ul>
+          <ul>
+            {lista &&
+              lista.map((task) => (
+                <div id="listatotal">
+                  <li key={task.id}>
+                    <div id="lista">
+                      {task.title},{task.desc},{task.date}
+                    </div>
+                  </li>
+                </div>
+              ))}
+          </ul>
         </div>
       </div>
     </>
