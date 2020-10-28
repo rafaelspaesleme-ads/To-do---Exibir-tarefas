@@ -19,7 +19,10 @@ export default function App() {
   return (
     <>
       <div id="principal">
+
         <div id="container">
+        <h1>-----TAREFAS----</h1>
+
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(enviarContato)}>
               <Controller
@@ -65,7 +68,10 @@ export default function App() {
                 <div id="listatotal">
                   <li key={task.id}>
                     <div id="lista">
-                      {task.title},{task.desc},{task.date}
+                      <p>{task.title}</p>
+                      <p>{task.desc}</p>
+                      <p>{task.date}</p>
+                      <button>Concluir Tarefa</button>
                     </div>
                   </li>
                 </div>
