@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FormProvider, Controller, useForm } from "react-hook-form";
 
-import "./App.css";
+import '../App.css'
 
 const initialState = [];
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
 
    function excluirTask(index) {
     const deletar = lista.filter((_,ind) => ind !== index);
-    console.log(index)
+    console.log("oii",index)
 
    setLista(deletar) 
 
@@ -70,25 +70,6 @@ export default function App() {
             </form>
           </FormProvider>
 
-          <ul>
-            {lista &&
-              lista.map((task, index) => (
-                <div id="listatotal">
-                  <li key={index}>
-                    <div id="lista">
-                      <input defaultValue={task.title}></input>
-                      <input defaultValue={task.desc}></input>
-                      <input defaultValue={task.date}></input>
-                     { /* <p>{task.title}</p> */}
-                      {task.favote && <span>(Favorito)</span>}
-                    { /*  <p>{task.desc}</p>
-                      <pri>{task.date}</pri> */}
-                      <button onClick={ () => excluirTask(index)}>Concluir Tarefa</button>
-                    </div>
-                  </li>
-                </div>
-              ))}
-          </ul>
         </div>
       </div>
     </>

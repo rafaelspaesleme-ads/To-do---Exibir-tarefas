@@ -52,7 +52,15 @@
   width: 150px;
 }
 
+
 #listatotal p {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
+
+
+#listatotal input {
+  border: 0
+}
+
+
