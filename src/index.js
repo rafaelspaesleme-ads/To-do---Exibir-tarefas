@@ -1,14 +1,34 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import Form from "./components/form";
-import Card from "./components/cards";
-ReactDOM.render(
-  <React.StrictMode>
- {/*    <Form />
-    <Card /> */}
-    <App />
-  </React.StrictMode>,
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Typography from '@material-ui/core/Typography';
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
+import useTodoState from './useTodoState';
+import './styles.css';
 
-  document.getElementById("root")
-);
+const App = () => {
+  const { todos, addTodo, deleteTodo } = useTodoState([]);
+
+  return (
+    <div className="App">
+      <Typography component="h1" variant="h2">
+        Tarefas 
+      </Typography>
+
+      <TodoForm
+        saveTodo={todoText => {
+          const trimmedText = todoText.trim();
+
+          if (trimmedText.length > 0) {
+            addTodo(trimmedText);
+          }
+        }}
+      />
+
+      <TodoList todos={todos} deleteTodo={deleteTodo} />
+    </div>
+  );
+};
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
