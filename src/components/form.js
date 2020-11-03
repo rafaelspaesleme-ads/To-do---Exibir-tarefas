@@ -66,7 +66,7 @@ export default function App() {
                 required
               />
 
-              <button type="submit"> Enviar</button>
+              <button type="submit">Enviar</button>
             </form>
           </FormProvider>
 
