@@ -1,29 +1,32 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import useInputState from './useInputState';
+import React from "react";
+import TextField from "@material-ui/core/TextField";
+import useInputState from "./useInputState";
+import { useForm } from "react-hook-form";
 
-const TodoForm = ({ saveTodo }) => {
-  const { value, desc, reset, onChange } = useInputState();
+const NewForm = () => {
+  const { register, handleSubmit } = useForm();
 
-  return (
-    <form
-      onSubmit={event => {
-        event.preventDefault();
+  const newTask = (task) => {
+    console.log(task);
+  };
+;
 
-        saveTodo(value, desc);
-        reset();
-      }}
-    >
-      <TextField
-        variant="outlined"
-        placeholder="Incluir tarefa"
-        margin="normal"
-        onChange={onChange}
-        value={value}
+return (
+  <form onSubmit={handleSubmit(newTask)}>
+  <input
+        name="task"
+        ref={register({
+          required: "Required",
+          pattern: {
+            message: ""
+          }
+        })}
       />
-    
-    </form>
-  );
-};
+      <button>Enviar</button>
+  </form>
+)
 
-export default TodoForm;
+
+}
+
+export default NewForm;
