@@ -15,17 +15,9 @@ const App = () => {
        Tarefas 
       </Typography>
 
-      <TodoForm
-        saveTodo={todoText => {
-          const trimmedText = todoText.trim();
+      <TodoForm/>
 
-          if (trimmedText.length > 0) {
-            addTodo(trimmedText);
-          }
-        }}
-      />
-
-      <TodoList todos={todos} deleteTodo={deleteTodo} />
+      
     </div>
   );
 };
