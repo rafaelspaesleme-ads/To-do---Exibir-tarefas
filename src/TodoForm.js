@@ -19,9 +19,9 @@ const TodoForm = ({ saveTodo }) => {
       .required("O campo descrição não pode estar vazio.")
       .min(10, "Preencha no mínimo 10 caracteres na descrição."),
     date: yup
-      .number()
-      .typeError("Só serão aceitos números")
-      .required("Preencha a data de inicio dessa tarefa."),
+    .string()
+    .required("O campo descrição não pode estar vazio.")
+    .min(10, "Preencha no mínimo 10 caracteres na descrição."),
   });
   const methods = useForm({ resolver: yupResolver(schema), defaultValues: {} });
   const { handleSubmit, errors, control } = methods;
@@ -63,12 +63,13 @@ const TodoForm = ({ saveTodo }) => {
           <p>{errors.desc?.message}</p>
           <Controller
             as={TextField}
-            type="number"
+            type="date"
             variant="outlined"
             placeholder="Incluir data"
             margin="normal"
             name="date"
             defaultValue={""}
+            date-format="DD MMMM YYYY"
           />
           <p> {errors.date?.message}</p>
           <Button type="submit" variant="contained" color="primary">

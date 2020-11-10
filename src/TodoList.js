@@ -38,7 +38,9 @@ const TodoList = ({task, index, _, onClickDelete}) => {
       <Card className={classes.root}>
         <CardContent>
           <Typography variant="h5" component="h2">
-            {`${task.id}, ${task.name.toUpperCase()}`}
+          
+             <p> {`${task.id}, ${task.name.toUpperCase()}`}</p>
+
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             {task.date}
