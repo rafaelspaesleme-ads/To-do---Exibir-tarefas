@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default () => {
+const UseInputState = () => {
   const [value, setValue] = useState('');
 
   return {
@@ -12,3 +12,5 @@ export default () => {
     reset: () => setValue('')
   };
 };
+
+export default UseInputState;

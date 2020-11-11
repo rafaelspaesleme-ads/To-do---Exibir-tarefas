@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-export default initialValue => {
-  const [todos, setTodos] = useState(initialValue);
+const InitialValue = () => {
+  const [todos, setTodos] = useState(null);
 
   return {
     todos,
@@ -14,4 +14,6 @@ export default initialValue => {
       setTodos(newTodos);
     }
   };
-};
+}
+
+export default InitialValue;
