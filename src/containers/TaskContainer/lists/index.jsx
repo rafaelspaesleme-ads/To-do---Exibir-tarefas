@@ -2,12 +2,13 @@ import React from "react";
 import ListItem from "@material-ui/core/ListItem";
 import {CardTask} from "../../../components/CardTask";
 
-export const ListTask = ({key, name, date, description, actionsButtonItem}) => {
+export const ListTask = ({id, name, date, description, actionsButtonItem}) => {
 
     return (
-        <ListItem key={key} dense button>
+      
+        <ListItem key={id} dense button>
             <CardTask
-                id={key}
+                id={id}
                 name={name}
                 date={date}
                 description={description}
