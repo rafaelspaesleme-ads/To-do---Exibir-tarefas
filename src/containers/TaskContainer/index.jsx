@@ -3,11 +3,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import { FormTaskContainer } from "./forms";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useInputState from "../../utils/hooks/useInputState";
-import { List } from "@material-ui/icons";
 import { ListTask } from "./lists";
 import { ButtonDelete } from "../../components/ButtonDelete";
 import { schemaTaskValidation } from "../../utils/validations/taskvalidation";
-import { Container, FormStyle } from './lists/styles'
+import { Container} from './lists/styles'
 
 
 export const TaskContainer = () => {
