@@ -6,7 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import CardActions from "@material-ui/core/CardActions";
 
 export const CardTask = ({id, name, date, description, actionsButtonCard}) => {
-
+ 
     return (
         <Card key={id} className={""}>
             <CardContent>
