@@ -11,4 +11,4 @@ export const schemaTaskValidation = () => yup.object().shape({
         .typeError("Só serão aceitos números")
         .required("Preencha a data de inicio dessa tarefa."),
 });
-
+  
