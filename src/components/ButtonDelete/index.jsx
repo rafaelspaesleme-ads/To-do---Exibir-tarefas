@@ -13,3 +13,5 @@ export const ButtonDelete = ({onClickDelete}) => {
         </IconButton>
     )
 }
+
+export default ButtonDelete;

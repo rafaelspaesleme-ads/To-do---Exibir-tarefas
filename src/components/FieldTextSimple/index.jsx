@@ -18,3 +18,5 @@ export const FieldTextSimple = ({placeholder, name, defaultValue, type = "text"}
         </>
     )
 }
+
+export default FieldTextSimple

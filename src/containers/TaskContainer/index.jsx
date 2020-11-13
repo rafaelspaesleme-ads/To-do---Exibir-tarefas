@@ -6,7 +6,8 @@ import useInputState from "../../utils/hooks/useInputState";
 import { ListTask } from "./lists";
 import { ButtonDelete } from "../../components/ButtonDelete";
 import { schemaTaskValidation } from "../../utils/validations/taskvalidation";
-import { Container} from './lists/styles'
+import { Container } from './lists/styles'
+import { ConvertDatePtBr } from './../../utils/functions/convertDate';
 
 
 export const TaskContainer = () => {
@@ -35,7 +36,7 @@ export const TaskContainer = () => {
     return (
         <>
             <FormProvider {...methods}>
-                
+
                 <FormTaskContainer
                     onSumbit={handleSubmit(enviarTarefa)}
                     name={"name"}
@@ -48,24 +49,23 @@ export const TaskContainer = () => {
                 {/* ajustar CSS da List */}
                 {listaAtual &&
                     listaAtual.map((task, index) => (
-                        <>
+                        <div key={index}>
                             <ListTask
-                                key={task.id}
                                 id={task.id}
                                 name={task.name}
-                                date={task.date}
+                                date={ConvertDatePtBr(task.date)}
                                 description={task.desc}
                                 actionsButtonItem={
                                     <>
                                         <ButtonDelete
                                             onClickDelete={() => {
-                                                setLista(lista.filter((_, idx) => idx !== index));
+                                                setLista(lista.length > 0 ? lista.splice(index) : [] );
                                             }}
                                         />
                                     </>
                                 }
                             />
-                        </>
+                        </div>
                     ))}
 
             </Container>

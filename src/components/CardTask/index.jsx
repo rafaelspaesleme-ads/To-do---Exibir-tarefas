@@ -5,10 +5,10 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import CardActions from "@material-ui/core/CardActions";
 
-export const CardTask = ({id, name, date, description, actionsButtonCard}) => {
- 
+export const CardTask = ({ id, name, date, description, actionsButtonCard }) => {
+
     return (
-        <Card key={id} className={""}>
+        <Card className={""}>
             <CardContent>
                 <Typography variant="h5" component="h2">
                     {`${id}, ${name.toUpperCase()}`}
@@ -20,10 +20,12 @@ export const CardTask = ({id, name, date, description, actionsButtonCard}) => {
                     {description.toUpperCase()}
                 </Typography>
             </CardContent>
-            <Divider variant="middle"/>
+            <Divider variant="middle" />
             <CardActions>
                 {actionsButtonCard}
             </CardActions>
         </Card>
     )
 }
+
+export default CardTask
