@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormTaskContainer } from "./forms";
+import { SaveForm } from "./forms/SaveForm";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useInputState from "../../utils/hooks/useInputState";
 import { ListTask } from "./lists";
-import { ButtonDelete } from "../../components/ButtonDelete";
+import { ButtonAction } from "../../components/ButtonAction";
 import { schemaTaskValidation } from "../../utils/validations/taskvalidation";
 import { Container } from './lists/styles'
 import { ConvertDatePtBr } from './../../utils/functions/convertDate';
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from '@material-ui/icons/Edit';
+import EditForm from "./forms/EditForm";
+
 
 
 export const TaskContainer = () => {
@@ -16,6 +20,9 @@ export const TaskContainer = () => {
     const [listaAtual, setListaAtual] = useState([]);
     const { handleSubmit } = methods; //errors, control
     const { value } = useInputState(); //desc, reset, onChange
+    const [name, setName] = useState('')
+    const [desc, setDesc] = useState('')
+    const [date, setDate] = useState('')
 
     const enviarTarefa = (todos) => {
         console.log('methods', methods);
@@ -37,12 +44,17 @@ export const TaskContainer = () => {
         <>
             <FormProvider {...methods}>
 
-                <FormTaskContainer
+                <SaveForm
                     onSumbit={handleSubmit(enviarTarefa)}
                     name={"name"}
                     desc={"desc"}
                     date={"date"}
                     defaultValue={value}
+                    defaultValue={value}
+                    defaultValue={value}
+                    valueName={name}
+                    valueDesc={desc}
+                    valueDate={date}
                 />
             </FormProvider>
             <Container>
@@ -57,11 +69,27 @@ export const TaskContainer = () => {
                                 description={task.desc}
                                 actionsButtonItem={
                                     <>
-                                        <ButtonDelete
-                                            onClickDelete={() => {
-                                                setLista(lista.length > 0 ? lista.splice(index) : [] );
+                                        <ButtonAction
+                                            ariaLabel={"Delete"}
+                                            icon={<DeleteIcon />}
+                                            onClickAction={() => {
+                                                setLista(lista.length > 0 ? lista.splice(index) : []);
                                             }}
                                         />
+                                        <ButtonAction
+                                            ariaLabel={"Editar"}
+                                            icon={<EditIcon />}
+                                            onClickAction={() => {
+
+                                                setName(task.name)
+                                                setDesc(task.desc)
+                                                setDate(task.date)
+
+                                                console.log("Value Name :", task.name)
+
+                                            }}
+                                        />
+
                                     </>
                                 }
                             />

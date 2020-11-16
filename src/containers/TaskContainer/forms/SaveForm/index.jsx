@@ -1,9 +1,9 @@
 import React from "react";
-import { FieldTextSimple } from "../../../components/FieldTextSimple";
-import { ButtonSave } from "../../../components/ButtonSave";
+import { FieldTextSimple } from "../../../../components/FieldTextSimple";
+import { ButtonSave } from "../../../../components/ButtonSave";
 import { useStyles } from './styles'
 
-export const FormTaskContainer = ({ onSumbit, name, desc, date, defaultValue }) => {
+export const SaveForm = ({ onSumbit, name, desc, date, defaultValue, valueName, valueDesc, valueDate }) => {
 
     const styles = useStyles()
     return (
@@ -16,18 +16,21 @@ export const FormTaskContainer = ({ onSumbit, name, desc, date, defaultValue }) 
                     name={name}
                     defaultValue={defaultValue}
                     type={"text"}
+                    value={valueName}
                 />
                 <FieldTextSimple
                     placeholder={'Digite a descrição'}
                     name={desc}
                     defaultValue={defaultValue}
                     type={"text"}
+                    value={valueDesc}
                 />
                 <FieldTextSimple
                     placeholder={'Digite a data'}
                     name={date}
                     defaultValue={defaultValue}
                     type={"date"}
+                    value={valueDate}
                 />
 
                 <ButtonSave className={styles.button}
@@ -42,4 +45,4 @@ export const FormTaskContainer = ({ onSumbit, name, desc, date, defaultValue }) 
     )
 }
 
-export default FormTaskContainer
+export default SaveForm
