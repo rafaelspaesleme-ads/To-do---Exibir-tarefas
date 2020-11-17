@@ -10,7 +10,7 @@ import { Container } from './lists/styles'
 import { ConvertDatePtBr } from './../../utils/functions/convertDate';
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from '@material-ui/icons/Edit';
-import EditForm from "./forms/EditForm";
+import CheckFavorite from './../../components/CheckFavorite/index';
 
 
 
@@ -55,6 +55,7 @@ export const TaskContainer = () => {
                     valueName={name}
                     valueDesc={desc}
                     valueDate={date}
+
                 />
             </FormProvider>
             <Container>
@@ -89,7 +90,7 @@ export const TaskContainer = () => {
 
                                             }}
                                         />
-
+                                        <CheckFavorite />
                                     </>
                                 }
                             />

@@ -1,16 +1,15 @@
 import React from 'react'
-import { FieldTextSimple } from './../../../../components/FieldTextSimple/index';
 import { Controller } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
 import { useForm } from 'react-hook-form';
 
 
-const EditForm = (name, defaultValueName, defaultValueDesc, defaultValueDate, desc, date, placeholder, type) => {
+const EditForm = (name,as, defaultValueName, defaultValueDesc, defaultValueDate, desc, date, placeholder, type) => {
 const {control} = useForm()
     return (
         <>
             <Controller
-                as={TextField}
+                as={as}
                 variant="outlined"
                 placeholder={placeholder}
                 margin="normal"
@@ -21,7 +20,7 @@ const {control} = useForm()
                 
             />
             <Controller
-                as={TextField}
+                as={as}
                 variant="outlined"
                 placeholder={placeholder}
                 margin="normal"
@@ -31,7 +30,7 @@ const {control} = useForm()
                 
             />
            <Controller
-                as={TextField}
+                as={as}
                 variant="outlined"
                 placeholder={placeholder}
                 margin="normal"
