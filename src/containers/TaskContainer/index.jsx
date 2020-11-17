@@ -23,6 +23,7 @@ export const TaskContainer = () => {
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [date, setDate] = useState('')
+    const [important, setImportant] = useState(false)
 
     const enviarTarefa = (todos) => {
         console.log('methods', methods);
@@ -49,12 +50,15 @@ export const TaskContainer = () => {
                     name={"name"}
                     desc={"desc"}
                     date={"date"}
+                    important={"important"}
                     defaultValue={value}
                     defaultValue={value}
                     defaultValue={value}
                     valueName={name}
                     valueDesc={desc}
                     valueDate={date}
+                    valueImportant={important}
+
 
                 />
             </FormProvider>
@@ -90,7 +94,6 @@ export const TaskContainer = () => {
 
                                             }}
                                         />
-                                        <CheckFavorite />
                                     </>
                                 }
                             />

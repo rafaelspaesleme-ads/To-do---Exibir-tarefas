@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { FieldTextSimple } from "../../../../components/FieldTextSimple";
 import { ButtonSave } from "../../../../components/ButtonSave";
 import { useStyles } from './styles'
 import CheckFavorite from './../../../../components/CheckFavorite/index';
 import TextField from '@material-ui/core/TextField';
-import { Favorite, FavoriteBorder } from "@material-ui/icons";
+import Favorite from '@material-ui/icons/Favorite';
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import { Switch } from "@material-ui/core";
 
 
-export const SaveForm = ({ onSumbit, name, desc, date, defaultValue, valueName, valueDesc, valueDate, as, checkedImportant }) => {
+
+export const SaveForm = ({ onSumbit, name, desc, date, defaultValue, valueName, valueDesc, valueDate, important, valueImportant }) => {
 
     const styles = useStyles()
+    const [checked, setChecked] = useState(true)
+    const handleChange = (event) => {
+        console.log('Console do checkbox', event)
+        setChecked({ ...checked, [event.target.name]: event.target.checked });
+    };
+
+
+
     return (
         <>
+
+
 
 
             <form className={styles.form} onSubmit={onSumbit}>
@@ -41,19 +54,21 @@ export const SaveForm = ({ onSumbit, name, desc, date, defaultValue, valueName, 
                     type={"date"}
                     value={valueDate}
                 />
- 
-           {/*       <FieldTextSimple
-                    as={FormControlLabel}
-                    control={
-                        <Checkbox
-                            icon={<FavoriteBorder />}
-                            checkedIcon={<Favorite />}
-                            name="important"
-                            checked={checkedImportant}
-                        />
-                    }
+                <FieldTextSimple
+                    as={Checkbox}
                     label={'Importante'}
-                />   */}
+                    name={important}
+                    defaultValue={defaultValue}
+                    type={"Checkbox"}
+                    value={valueImportant}
+                    checked={checked}
+                    onChange={() => 
+                        { 
+                            console.log('Titulo do checked', checked) 
+                            setChecked(checked ? true : false) }}
+                />
+
+
 
                 <ButtonSave className={styles.button}
                     type={"submit"}
