@@ -88,7 +88,7 @@ export const TaskContainer = () => {
                                     />
                                     <ButtonAction
                                         ariaLabel={"Editar"}
-                                        icon={task.important ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
+                                        icon={task.important ? <FavoriteIcon color="secondary"/> : <FavoriteBorderIcon />}
                                         onClickAction={() => {
                                             const data = {
                                                 id: task.id,
