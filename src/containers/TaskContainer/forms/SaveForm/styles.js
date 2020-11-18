@@ -6,6 +6,7 @@ export const useStyles = makeStyles(() => ({
     flexDirection: "column",
     alignItems: "center !important",
     justifyContent: "center",
+    margin: 30
   },
   button: {
     marginTop: 15,

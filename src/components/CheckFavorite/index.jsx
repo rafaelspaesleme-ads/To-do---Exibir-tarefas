@@ -1,28 +1,26 @@
 import React from "react";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import {Favorite, FavoriteBorder} from "@material-ui/icons";
 
 
-export default function CheckFavorite() {
-  const [state, setState] = React.useState({ checkedA: false });
+export const CheckFavorite = ({name, type = "checkbox", label, register, control}) => {
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  return (
-    <FormGroup row>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.checkedA}
-            onChange={handleChange}
-            name="checkedA"
-          />
-        }
-        label="Importante"
-      />
-    </FormGroup>
-  );
+    return (
+        <FormControlLabel
+            control={
+                <Checkbox
+                    name={name}
+                    type={type}
+                    inputRef={register}
+                    control={control}
+                    icon={<FavoriteBorder />}
+                    checkedIcon={<Favorite />}
+                />
+            }
+            label={label}
+        />
+    );
 }
+
+export default CheckFavorite;

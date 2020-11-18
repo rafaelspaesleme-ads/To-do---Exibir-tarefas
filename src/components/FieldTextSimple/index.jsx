@@ -1,23 +1,20 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import {Controller} from "react-hook-form";
- 
-export const FieldTextSimple = ({as,placeholder, name, defaultValue, value, type = "text", onChange, checked}) => {
+
+export const FieldTextSimple = ({placeholder, name, type = "text", register, control}) => {
 
     return (
         <>
             <Controller
-                as={as}
-                onChange={onChange}
-                checked={as === 'Checkbox' ? checked : undefined}
+                as={TextField}
                 variant="outlined"
                 placeholder={placeholder}
                 margin="normal"
                 name={name}
-                defaultValue={defaultValue}
                 type={type}
-                value={value}
-                
+                inputRef={register}
+                control={control}
             />
         </>
     )

@@ -1,5 +1,9 @@
 export const ConvertDatePtBr = (date) => {
-  const newDate = date.split('-') 
+  if (date && date.includes('-')) {
+    const newDate = date.split('-')
 
-  return `${newDate[2]} /${newDate[1]} / ${newDate[0]}`;
+    return `${newDate[2]} /${newDate[1]} / ${newDate[0]}`;
+  } else {
+    return date;
+  }
 };

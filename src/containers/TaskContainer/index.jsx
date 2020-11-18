@@ -1,105 +1,110 @@
-import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { SaveForm } from "./forms/SaveForm";
-import { yupResolver } from "@hookform/resolvers/yup";
-import useInputState from "../../utils/hooks/useInputState";
-import { ListTask } from "./lists";
-import { ButtonAction } from "../../components/ButtonAction";
-import { schemaTaskValidation } from "../../utils/validations/taskvalidation";
-import { Container } from './lists/styles'
-import { ConvertDatePtBr } from './../../utils/functions/convertDate';
+import React, {useEffect, useState} from "react";
+import {useForm} from "react-hook-form";
+import {SaveForm} from "./forms/SaveForm";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {ListTask} from "./lists";
+import {ButtonAction} from "../../components/ButtonAction";
+import {schemaTaskValidation} from "../../utils/validations/taskvalidation";
+import {Container} from './lists/styles'
+import {ConvertDatePtBr} from '../../utils/functions/convertDate';
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from '@material-ui/icons/Edit';
-import CheckFavorite from './../../components/CheckFavorite/index';
-
-
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 export const TaskContainer = () => {
-    const methods = useForm({ resolver: yupResolver(schemaTaskValidation()), defaultValues: {} });
-    const [lista, setLista] = useState([]);
+    const {register, handleSubmit, control} = useForm({resolver: yupResolver(schemaTaskValidation())});
     const [listaAtual, setListaAtual] = useState([]);
-    const { handleSubmit } = methods; //errors, control
-    const { value } = useInputState(); //desc, reset, onChange
-    const [name, setName] = useState('')
-    const [desc, setDesc] = useState('')
-    const [date, setDate] = useState('')
-    const [important, setImportant] = useState(false)
+    const [lista, setLista] = useState([]);
+    const [update, setUpdate] = useState(false);
 
-    const enviarTarefa = (todos) => {
-        console.log('methods', methods);
-        console.log('todos', todos);
-        const novaTarefa = { id: Math.floor(Math.random() * 999 + 1), ...todos };
-        console.log('novaTarefa', novaTarefa);
-        setLista((prevState) => [...prevState, novaTarefa]);
-        console.log("todos", todos);
+    const handleSaveTask = (task) => {
+        console.log('task', task);
+        const newTask = {id: Math.floor(Math.random() * 999 + 1), ...task};
+        console.log('novaTarefa', newTask);
+        setLista((prevState) => [...prevState, newTask]);
         console.log("lista", lista);
-    };
+    }
+
+    const handleUpdateTask = (task, index, list) => {
+        setUpdate(true);
+        console.log('list', list);
+        console.log('task', task);
+        console.log('index', index);
+        let arr = list.splice(index, 1, task);
+        console.log('item excluido', arr);
+        console.log('lista atualizada', list);
+        setLista(list);
+    }
 
     useEffect(() => {
         if (lista.length > 0) {
             setListaAtual(lista)
         }
-    }, [lista]);
+        if (update) {
+            setListaAtual(lista);
+            console.log('listaaaaa', lista);
+        }
+    }, [lista, update]);
 
     return (
         <>
-            <FormProvider {...methods}>
-
-                <SaveForm
-                    onSumbit={handleSubmit(enviarTarefa)}
-                    name={"name"}
-                    desc={"desc"}
-                    date={"date"}
-                    important={"important"}
-                    defaultValue={value}
-                    defaultValue={value}
-                    defaultValue={value}
-                    valueName={name}
-                    valueDesc={desc}
-                    valueDate={date}
-                    valueImportant={important}
-
-
-                />
-            </FormProvider>
+            <SaveForm
+                onSumbit={handleSubmit(handleSaveTask)}
+                name={"name"}
+                desc={"desc"}
+                date={"date"}
+                important={"important"}
+                register={register}
+                control={control}
+            />
             <Container>
                 {/* ajustar CSS da List */}
                 {listaAtual &&
-                    listaAtual.map((task, index) => (
-                        <div key={index}>
-                            <ListTask
-                                id={task.id}
-                                name={task.name}
-                                date={ConvertDatePtBr(task.date)}
-                                description={task.desc}
-                                actionsButtonItem={
-                                    <>
-                                        <ButtonAction
-                                            ariaLabel={"Delete"}
-                                            icon={<DeleteIcon />}
-                                            onClickAction={() => {
-                                                setLista(lista.length > 0 ? lista.splice(index) : []);
-                                            }}
-                                        />
-                                        <ButtonAction
-                                            ariaLabel={"Editar"}
-                                            icon={<EditIcon />}
-                                            onClickAction={() => {
+                listaAtual.map((task, index) => (
+                    <div key={index}>
+                        <ListTask
+                            id={task.id}
+                            name={task.name}
+                            date={ConvertDatePtBr(task.date)}
+                            description={task.desc}
+                            actionsButtonItem={
+                                <>
+                                    <ButtonAction
+                                        ariaLabel={"Delete"}
+                                        icon={<DeleteIcon/>}
+                                        onClickAction={() => {
+                                            setLista(lista.length > 0 ? lista.splice(index) : []);
+                                        }}
+                                    />
+                                    <ButtonAction
+                                        ariaLabel={"Editar"}
+                                        icon={<EditIcon/>}
+                                        onClickAction={() => {
 
-                                                setName(task.name)
-                                                setDesc(task.desc)
-                                                setDate(task.date)
+                                            console.log("Value Name :", task.name)
 
-                                                console.log("Value Name :", task.name)
-
-                                            }}
-                                        />
-                                    </>
-                                }
-                            />
-                        </div>
-                    ))}
-
+                                        }}
+                                    />
+                                    <ButtonAction
+                                        ariaLabel={"Editar"}
+                                        icon={task.important ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
+                                        onClickAction={() => {
+                                            const data = {
+                                                id: task.id,
+                                                name: task.name,
+                                                desc: task.desc,
+                                                date: task.date,
+                                                important: !task.important
+                                            }
+                                            handleUpdateTask(data, index, listaAtual);
+                                        }}
+                                    />
+                                </>
+                            }
+                        />
+                    </div>
+                ))}
             </Container>
         </>
     )
